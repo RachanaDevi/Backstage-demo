@@ -39,6 +39,8 @@ import LightIcon from '@material-ui/icons/WbSunny';
 import { ThemeProvider } from '@material-ui/core/styles';
 
 import { twTheme } from '../src/themes/twTheme'
+import { HomePage } from "../src/components/home/Home";
+import { HomepageCompositionRoot } from '@backstage/plugin-home';
 
 const app = createApp({
   apis,
@@ -75,7 +77,10 @@ const AppRouter = app.getRouter();
 
 const routes = (
   <FlatRoutes>
-    <Navigate key="/" to="catalog" />
+    {/* <Navigate key="/" to="catalog" /> */}
+    <Route path="/" element={<HomepageCompositionRoot />}>
+      <HomePage />
+    </Route>
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
@@ -83,6 +88,7 @@ const routes = (
     >
       {entityPage}
     </Route>
+
     <Route path="/docs" element={<TechDocsIndexPage />} />
     <Route
       path="/docs/:namespace/:kind/:name/*"
